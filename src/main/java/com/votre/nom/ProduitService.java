@@ -22,6 +22,13 @@ public class ProduitService {
         produits.add(produit);
     }
 
+    public Produit chercherProduitParId(Long id) {
+        return produits.stream()
+                .filter(produit -> produit.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
     private boolean produitExiste(Long id) {
         return produits.stream().anyMatch(produit -> produit.getId().equals(id));
     }
