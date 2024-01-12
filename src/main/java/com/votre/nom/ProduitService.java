@@ -44,6 +44,14 @@ public class ProduitService {
         supprimerProduit(produit.getId());
         ajouterProduit(produit);
     }
+    public void supprimerProduit(Long id) {
+        // Vérification de l'existence du produit
+        if (!produitExiste(id)) {
+            throw new IllegalArgumentException("Le produit que vous essayez de supprimer n'existe pas.");
+        }
+
+        produits.removeIf(produit -> produit.getId().equals(id));
+    }
 
 
     private boolean produitExiste(Long id) {
