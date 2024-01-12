@@ -29,6 +29,23 @@ public class ProduitService {
                 .orElse(null);
     }
 
+    public void mettreAJourProduit(Produit produit) {
+        // Vérification de l'existence du produit
+        if (!produitExiste(produit.getId())) {
+            throw new IllegalArgumentException("Le produit que vous essayez de mettre à jour n'existe pas.");
+        }
+
+        // Validation des données (prix et quantité positifs)
+        if (produit.getPrix() < 0 || produit.getQuantite() < 0) {
+            throw new IllegalArgumentException("Le prix et la quantité des produits doivent être positifs.");
+        }
+
+        // Mise à jour du produit
+        supprimerProduit(produit.getId());
+        ajouterProduit(produit);
+    }
+
+
     private boolean produitExiste(Long id) {
         return produits.stream().anyMatch(produit -> produit.getId().equals(id));
     }
