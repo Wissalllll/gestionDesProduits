@@ -1,0 +1,19 @@
+ 
+language: java
+jdk:
+  - openjdk11
+
+# Avant l'installation
+before_install:
+  - chmod +x mvnw
+
+# Script de construction (ici, Maven)
+script: ./mvnw clean install
+
+# Notifications par email
+notifications:
+  email:
+    recipients:
+      - rahaouiwissall@email.com
+    on_success: always
+    on_failure: always
